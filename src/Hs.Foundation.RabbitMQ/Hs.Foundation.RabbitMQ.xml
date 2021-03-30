@@ -1,0 +1,828 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hs.Foundation.RabbitMQ</name>
+    </assembly>
+    <members>
+        <member name="T:Hs.Foundation.RabbitMQ.Abstractions.IConsumer">
+            <summary>
+            消息消费者
+            </summary>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Abstractions.IConsumer.Subscribe(System.String,System.String,System.Func{System.ReadOnlyMemory{System.Byte},System.UInt64,System.Threading.Tasks.Task})">
+            <summary>
+            订阅消息
+            </summary>
+            <param name="topic">消息主题</param>
+            <param name="group">消息分组</param>
+            <param name="handler">消息处理器</param>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Abstractions.IConsumer.Ack(System.String,System.UInt64,System.Boolean)">
+            <summary>
+            确认消息
+            </summary>
+            <param name="group">消息组</param>
+            <param name="deliveryTag">消息标识</param>
+            <param name="multiple">是否批量确认，如果批量确认，则deliveryTag以下的消息都将被确认</param>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Abstractions.IConsumer.Nack(System.String,System.UInt64,System.Boolean,System.Boolean)">
+            <summary>
+            拒绝消息
+            </summary>
+            <param name="group">消息组</param>
+            <param name="deliveryTag">消息ID</param>
+            <param name="multiple">是否批量拒绝</param>
+            <param name="enqueue">是否重新入队</param>
+        </member>
+        <member name="T:Hs.Foundation.RabbitMQ.Abstractions.IProducer">
+            <summary>
+            消息生产者
+            </summary>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Abstractions.IProducer.Publish(Hs.Foundation.RabbitMQ.Message.IMessage,System.String,System.String)">
+            <summary>
+            发布消息
+            </summary>
+            <param name="message">   要发布的消息 </param>
+            <param name="topic">     消息主题 </param>
+            <param name="messageId"> 消息ID </param>
+            <returns> </returns>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Abstractions.IProducer.Publish(System.Collections.Generic.IEnumerable{Hs.Foundation.RabbitMQ.Message.PushMessageObject})">
+            <summary>
+            批量发布消息
+            </summary>
+            <param name="messageObject"> </param>
+            <returns> </returns>
+        </member>
+        <member name="T:Hs.Foundation.RabbitMQ.Common.ChannelObject">
+            <summary>
+            消息通道对象
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.RabbitMQ.Common.ChannelObject.connectionObject">
+            <summary>
+            连接对象
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.RabbitMQ.Common.ChannelObject.channel">
+            <summary>
+            通道
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.RabbitMQ.Common.ChannelObject.persistentProperties">
+            <summary>
+            持久化属性
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.RabbitMQ.Common.ChannelObject.unPersistentProperties">
+            <summary>
+            非持久化属性
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.RabbitMQ.Common.ChannelObject.sendAction">
+            <summary>
+            消息发送处理器
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.RabbitMQ.Common.ChannelObject.messages">
+            <summary>
+            批量发送消息的缓存
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.RabbitMQ.Common.ChannelObject.logger">
+            <summary>
+            日志对象
+            </summary>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Common.ChannelObject.#ctor(Hs.Foundation.RabbitMQ.Common.ConnectionObject,RabbitMQ.Client.IModel,Microsoft.Extensions.Logging.ILogger{Hs.Foundation.RabbitMQ.Common.ChannelObject})">
+            <summary>
+            初始化
+            </summary>
+            <param name="connectionObject">连接对象</param>
+            <param name="channel">管道</param>
+            <param name="logger">日志对象</param>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Common.ChannelObject.Finalize">
+            <summary>
+            析构函数
+            </summary>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Common.ChannelObject.BuilderSendAction">
+            <summary>
+            构建消息批量发送
+            </summary>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Common.ChannelObject.BatchPublish(System.Collections.Generic.IEnumerable{Hs.Foundation.RabbitMQ.Message.PushMessageObject})">
+            <summary>
+            批量发送消息
+            </summary>
+            <param name="messages"></param>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Common.ChannelObject.Publish(System.Byte[],System.String,System.String,System.Boolean)">
+            <summary>
+            发送消息
+            </summary>
+            <param name="msg">消息内容</param>
+            <param name="topic">消息主题</param>
+            <param name="messageId">消息ID</param>
+            <param name="persistent">是否持久化</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Common.ChannelObject.Publish(System.Collections.Generic.IEnumerable{Hs.Foundation.RabbitMQ.Message.PushMessageObject})">
+            <summary>
+            批量发送消息
+            </summary>
+            <param name="messageObjects"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Common.ChannelObject.Subscribe(System.String,System.String,System.Func{System.ReadOnlyMemory{System.Byte},System.UInt64,System.Threading.Tasks.Task})">
+            <summary>
+            订阅消息
+            </summary>
+            <param name="topic">消息Topic</param>
+            <param name="group">消息组</param>
+            <param name="handler">事件处理器</param>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Common.ChannelObject.Ack(System.UInt64,System.Boolean)">
+            <summary>
+            确认消息
+            </summary>
+            <param name="deliveryTag">消息标识</param>
+            <param name="multiple">是否一次确认多个消息</param>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Common.ChannelObject.Nack(System.UInt64,System.Boolean,System.Boolean)">
+            <summary>
+            拒绝消息
+            </summary>
+            <param name="deliveryTag">消息标识</param>
+            <param name="multiple">是否一次拒绝多个消息</param>
+            <param name="requeue">是否重回队列</param>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Common.ChannelObject.Dispose">
+            <summary>
+            释放资源
+            </summary>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Common.ChannelObject.Dispose(System.Boolean)">
+            <summary>
+            释放资源
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:Hs.Foundation.RabbitMQ.Common.ChannelPooledObjectPolicy">
+            <summary>
+            RabbitMQ通道创建策略
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.RabbitMQ.Common.ChannelPooledObjectPolicy.rabbitMQOptions">
+            <summary>
+            配置对象
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.RabbitMQ.Common.ChannelPooledObjectPolicy.consumerOptions">
+            <summary>
+            消费者配置对象
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.RabbitMQ.Common.ChannelPooledObjectPolicy.producerOptions">
+            <summary>
+            生产者配置对象
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.RabbitMQ.Common.ChannelPooledObjectPolicy.connectionFactory">
+            <summary>
+            连接工厂
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.RabbitMQ.Common.ChannelPooledObjectPolicy.connectionObjects">
+            <summary>
+            连接对象集合
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.RabbitMQ.Common.ChannelPooledObjectPolicy.counter">
+            <summary>
+            计数器
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.RabbitMQ.Common.ChannelPooledObjectPolicy.loggerFactory">
+            <summary>
+            日志工厂
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.RabbitMQ.Common.ChannelPooledObjectPolicy.logger">
+            <summary>
+            日志对象
+            </summary>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Common.ChannelPooledObjectPolicy.#ctor(Microsoft.Extensions.Options.IOptions{Hs.Foundation.RabbitMQ.Options.RabbitMQOptions},Microsoft.Extensions.Options.IOptions{Hs.Foundation.RabbitMQ.Options.ConsumerOptions},Microsoft.Extensions.Options.IOptions{Hs.Foundation.RabbitMQ.Options.ProducerOptions},Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            初始化
+            </summary>
+            <param name="rabbitMQOptions">配置对象</param>
+            <param name="consumerOptions">消费者配置</param>
+            <param name="producerOptions">生产者配置</param>
+            <param name="loggerFactory">日志工厂对象</param>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Common.ChannelPooledObjectPolicy.Create">
+            <summary>
+            创建通道对象
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Common.ChannelPooledObjectPolicy.Return(Hs.Foundation.RabbitMQ.Common.ChannelObject)">
+            <summary>
+            归还对象
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Hs.Foundation.RabbitMQ.Common.ConnectionObject">
+            <summary>
+            连接对象
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.RabbitMQ.Common.ConnectionObject.channels">
+            <summary>
+            消息接收推送通道
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.RabbitMQ.Common.ConnectionObject.connection">
+            <summary>
+            连接对象
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.RabbitMQ.Common.ConnectionObject.counter">
+            <summary>
+            计数器
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.RabbitMQ.Common.ConnectionObject.loggerFactory">
+            <summary>
+            日志工厂
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.RabbitMQ.Common.ConnectionObject.logger">
+            <summary>
+            日志对象
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Common.ConnectionObject.RabbitMQOptions">
+            <summary>
+            配置对象
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Common.ConnectionObject.ConsumerOptions">
+            <summary>
+            消费者配置对象
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Common.ConnectionObject.ProducerOptions">
+            <summary>
+            生产者配置
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Common.ConnectionObject.ChannelCount">
+            <summary>
+            管道总数
+            </summary>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Common.ConnectionObject.#ctor(RabbitMQ.Client.IConnection,Hs.Foundation.RabbitMQ.Options.RabbitMQOptions,Hs.Foundation.RabbitMQ.Options.ConsumerOptions,Hs.Foundation.RabbitMQ.Options.ProducerOptions,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            初始化
+            </summary>
+            <param name="connection">连接对象</param>
+            <param name="options">配置对象</param>
+            <param name="consumerOptions">消费者配置对象</param>
+            <param name="producerOptions">生产者配置对象</param>
+            <param name="loggerFactory">日志工厂</param>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Common.ConnectionObject.GetChannel">
+            <summary>
+            获取通道对象
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Hs.Foundation.RabbitMQ.Common.IRabbitMQClient">
+            <summary>
+            RabbitMQ客户端
+            </summary>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Common.IRabbitMQClient.GetChannel">
+            <summary>
+            获取通道对象
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Hs.Foundation.RabbitMQ.Common.RabbitMQClient">
+            <summary>
+            RabbitMQ客户端
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.RabbitMQ.Common.RabbitMQClient.connectionPool">
+            <summary>
+            通道对象池
+            </summary>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Common.RabbitMQClient.#ctor(Microsoft.Extensions.Options.IOptions{Hs.Foundation.RabbitMQ.Options.RabbitMQOptions},Microsoft.Extensions.Options.IOptions{Hs.Foundation.RabbitMQ.Options.ConsumerOptions},Microsoft.Extensions.Options.IOptions{Hs.Foundation.RabbitMQ.Options.ProducerOptions},Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            初始化
+            </summary>
+            <param name="rabbitMQOptions">配置对象</param>
+            <param name="consumerOptions">消费者配置对象</param>
+            <param name="producerOptions">生产者配置对象</param>
+            <param name="loggerFactory">日志工厂</param>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Common.RabbitMQClient.GetChannel">
+            <summary>
+            获取通道对象
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Hs.Foundation.RabbitMQ.Consumer.RabbitMQConsumer">
+            <summary>
+            RabbitMQ消费者
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.RabbitMQ.Consumer.RabbitMQConsumer._rabbitMQClient">
+            <summary>
+            RabbitMQ客户端对象
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.RabbitMQ.Consumer.RabbitMQConsumer.channels">
+            <summary>
+            订阅的通道集合
+            </summary>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Consumer.RabbitMQConsumer.#ctor(Hs.Foundation.RabbitMQ.Common.IRabbitMQClient)">
+            <summary>
+            初始化
+            </summary>
+            <param name="rabbitMQClient"></param>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Consumer.RabbitMQConsumer.Subscribe(System.String,System.String,System.Func{System.ReadOnlyMemory{System.Byte},System.UInt64,System.Threading.Tasks.Task})">
+            <summary>
+            订阅消息
+            </summary>
+            <param name="topic">消息主题</param>
+            <param name="group">消息分组</param>
+            <param name="handler">消息处理器</param>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Consumer.RabbitMQConsumer.Ack(System.String,System.UInt64,System.Boolean)">
+            <summary>
+            确认消息
+            </summary>
+            <param name="group">组</param>
+            <param name="deliveryTag">消息标识</param>
+            <param name="multiple">是否批量确认，如果批量确认，则deliveryTag以下的消息都将被确认</param>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Consumer.RabbitMQConsumer.Nack(System.String,System.UInt64,System.Boolean,System.Boolean)">
+            <summary>
+            拒绝消息
+            </summary>
+            <param name="group">组</param>
+            <param name="deliveryTag">消息ID</param>
+            <param name="multiple">是否批量拒绝</param>
+            <param name="enqueue">是否重新入队</param>
+        </member>
+        <member name="T:Hs.Foundation.RabbitMQ.Event.EventMetadata">
+            <summary>
+            事件元数据
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Event.EventMetadata.EventId">
+            <summary>
+            事件ID
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Event.EventMetadata.Version">
+            <summary>
+            事件版本
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Event.EventMetadata.DateTime">
+            <summary>
+            事件时间
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Event.EventMetadata.CommandId">
+            <summary>
+            触发事件的命令ID
+            </summary>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Event.EventMetadata.#ctor(System.Int64,System.DateTimeOffset,System.String,System.String)">
+            <summary>
+            初始化
+            </summary>
+            <param name="version">版本号</param>
+            <param name="datetime">时间</param>
+            <param name="eventId">事件ID</param>
+            <param name="commandId">命令ID</param>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Event.EventMetadata.Create(System.Int64,System.DateTimeOffset,System.String,System.String)">
+            <summary>
+            创建事件元数据
+            </summary>
+            <param name="version">版本号</param>
+            <param name="datetime">时间</param>
+            <param name="eventId">事件ID</param>
+            <param name="commandId">命令ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Event.EventMetadata.GetBytes">
+            <summary>
+            获取字节数组
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Event.EventMetadata.TryFromBytes(System.Span{System.Byte},Hs.Foundation.RabbitMQ.Event.EventMetadata@)">
+            <summary>
+            从字节数组转元数据对象
+            </summary>
+            <param name="eventMetadataBytes">元数据字节数组</param>
+            <param name="eventMetadata">元数据对象</param>
+            <returns></returns>
+        </member>
+        <member name="T:Hs.Foundation.RabbitMQ.Event.IEvent">
+            <summary>
+            事件
+            </summary>
+        </member>
+        <member name="T:Hs.Foundation.RabbitMQ.Extensions.ConfigurationHelper">
+            <summary>
+            配置对象助手类
+            </summary>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Extensions.ConfigurationHelper.GetConfiguration(Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            获取配置对象
+            </summary>
+            <param name="configuration"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Hs.Foundation.RabbitMQ.Extensions.ServiceCollectionExtensions">
+            <summary>
+            ServiceCollection扩展方法
+            </summary>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Extensions.ServiceCollectionExtensions.AddRabbitMQMessagBus(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Hs.Foundation.RabbitMQ.Options.RabbitMQOptions})">
+            <summary>
+            添加RabbitMQ消息总线
+            </summary>
+            <param name="services">        IServiceCollection </param>
+            <param name="rabbitMQOptions"> 设置配置信息委托 </param>
+            <returns> </returns>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Extensions.ServiceCollectionExtensions.AddRabbitMQMessagBus(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            添加RabbitMQ消息总线
+            </summary>
+            <param name="services">      IServiceCollection </param>
+            <param name="configuration"> 配置文件对象(RabbitMQOptions) </param>
+            <returns> </returns>
+        </member>
+        <member name="T:Hs.Foundation.RabbitMQ.Message.IMessage">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Message.IMessage.Name">
+            <summary>
+            消息Name
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Message.IMessage.Event">
+            <summary>
+            事件对象
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Message.IMessage.EventMetadata">
+            <summary>
+            事件元数据
+            </summary>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Message.IMessage.GetBytes">
+            <summary>
+            获取消息的字节数组
+            </summary>
+            <returns> </returns>
+        </member>
+        <member name="T:Hs.Foundation.RabbitMQ.Message.MessageMemoryStream">
+            <summary>
+            消息内存流
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.RabbitMQ.Message.MessageMemoryStream.arrayPool">
+            <summary>
+            数组池
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.RabbitMQ.Message.MessageMemoryStream.currentbuffer">
+            <summary>
+            当前的字节数组
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.RabbitMQ.Message.MessageMemoryStream.canWrite">
+            <summary>
+            当前流是否可写
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.RabbitMQ.Message.MessageMemoryStream.length">
+            <summary>
+            流数据的长度
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.RabbitMQ.Message.MessageMemoryStream.position">
+            <summary>
+            当前流操作的位置
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Message.MessageMemoryStream.CanRead">
+            <summary>
+            流是否能读
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Message.MessageMemoryStream.CanSeek">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Message.MessageMemoryStream.CanWrite">
+            <summary>
+            流是否能写
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Message.MessageMemoryStream.Length">
+            <summary>
+            流的长度
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Message.MessageMemoryStream.Position">
+            <summary>
+            当前的位置
+            </summary>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Message.MessageMemoryStream.#ctor">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Message.MessageMemoryStream.#ctor(System.Buffers.ArrayPool{System.Byte})">
+            <summary>
+            初始化
+            </summary>
+            <param name="pool"> 数组池 </param>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Message.MessageMemoryStream.#ctor(System.Buffers.ArrayPool{System.Byte},System.Int32)">
+            <summary>
+            初始化
+            </summary>
+            <param name="pool"> 数组池 </param>
+            <param name="size"> 池大小 </param>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Message.MessageMemoryStream.#ctor(System.Byte[])">
+            <summary>
+            初始化
+            </summary>
+            <param name="data"> 放入流中的字节数组 </param>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Message.MessageMemoryStream.Flush">
+            <summary>
+            冲洗缓冲区
+            </summary>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Message.MessageMemoryStream.Read(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            读取流数据
+            </summary>
+            <param name="buffer"> 要存放数据的byte数组 </param>
+            <param name="offset"> 读取的位置 </param>
+            <param name="count">  读取的字节数 </param>
+            <returns> </returns>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Message.MessageMemoryStream.Seek(System.Int64,System.IO.SeekOrigin)">
+            <summary>
+            设定流的操作位置
+            </summary>
+            <param name="offset"> 操作位置 </param>
+            <param name="origin"> 位置类型 </param>
+            <returns> </returns>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Message.MessageMemoryStream.SetLength(System.Int64)">
+            <summary>
+            设置流的长度
+            </summary>
+            <param name="value"> 长度 </param>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Message.MessageMemoryStream.Write(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            写入流
+            </summary>
+            <param name="buffer"> </param>
+            <param name="offset"> </param>
+            <param name="count">  </param>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Message.MessageMemoryStream.ToArray">
+            <summary>
+            转为字节数组
+            </summary>
+            <returns> </returns>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Message.MessageMemoryStream.ReallocateBuffer(System.Int32)">
+            <summary>
+            重新分配缓存区
+            </summary>
+            <param name="minimumRequired"> </param>
+        </member>
+        <member name="T:Hs.Foundation.RabbitMQ.Message.MessageObject">
+            <summary>
+            事件包装对象
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Message.MessageObject.Event">
+            <summary>
+            事件对象
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Message.MessageObject.EventMetadata">
+            <summary>
+            事件元数据
+            </summary>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Message.MessageObject.#ctor(Hs.Foundation.RabbitMQ.Event.IEvent,Hs.Foundation.RabbitMQ.Event.EventMetadata)">
+            <summary>
+            初始化
+            </summary>
+            <param name="event"></param>
+            <param name="eventMetadata"></param>
+        </member>
+        <member name="T:Hs.Foundation.RabbitMQ.Message.PushMessageObject">
+            <summary>
+            要推送的消息对象
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Message.PushMessageObject.Message">
+            <summary>
+            要发送的消息
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Message.PushMessageObject.Topic">
+            <summary>
+            消息主题
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Message.PushMessageObject.MessageId">
+            <summary>
+            消息ID
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Message.PushMessageObject.Persistent">
+            <summary>
+            是否持久化
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Message.PushMessageObject.ResultTask">
+            <summary>
+            消息是否发送成功的任务
+            </summary>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Message.PushMessageObject.#ctor(System.Byte[],System.String,System.String,System.Boolean)">
+            <summary>
+            初始化
+            </summary>
+            <param name="message">要发送的消息</param>
+            <param name="topic">消息主题</param>
+            <param name="messageId">消息ID</param>
+            <param name="persistent">是否持久化</param>
+        </member>
+        <member name="T:Hs.Foundation.RabbitMQ.Options.ConsumerOptions">
+            <summary>
+            消费者配置
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Options.ConsumerOptions.AutoAck">
+            <summary>
+            是否自动Ack
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Options.ConsumerOptions.ReturnQueue">
+            <summary>
+            消息消费失败是否重回队列(如果为false，则在本地不停重发给消费者消费)
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Options.ConsumerOptions.CunsumerMaxBatchSize">
+            <summary>
+            消费者批量处理每次处理的最大消息量(也就是客户端每次最大从消息服务器拉取的最大消息数量)
+            </summary>
+        </member>
+        <member name="T:Hs.Foundation.RabbitMQ.Options.ProducerOptions">
+            <summary>
+            消息生产者配置
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Options.ProducerOptions.MaxPublishMessages">
+            <summary>
+            消息批量发送的最大数量
+            </summary>
+        </member>
+        <member name="T:Hs.Foundation.RabbitMQ.Options.RabbitMQOptions">
+            <summary>
+            RabbitMQ配置
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Options.RabbitMQOptions.ExchangeName">
+            <summary>
+            交换机名称
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Options.RabbitMQOptions.HostNames">
+            <summary>
+            服务器多个HostName之间用逗号隔开
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Options.RabbitMQOptions.EndPoints">
+            <summary>
+            服务器端点集合
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Options.RabbitMQOptions.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Options.RabbitMQOptions.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Options.RabbitMQOptions.VirtualHost">
+            <summary>
+            VirtualHost
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Options.RabbitMQOptions.ChannelPoolSize">
+            <summary>
+            每个连接上拉取和推送消息的池的大小(就是RabittMQ的Model的队列大小)
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.RabbitMQ.Options.RabbitMQOptions.ConnectionPoolSize">
+            <summary>
+            最大连接数，拉取和推送消息的最大最大连接数
+            </summary>
+        </member>
+        <member name="T:Hs.Foundation.RabbitMQ.Producer.RabbitMQProducer">
+            <summary>
+            RabbitMQ消息生产者
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.RabbitMQ.Producer.RabbitMQProducer.rabbitMQClient">
+            <summary>
+            RabbitMQ客户端对象
+            </summary>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Producer.RabbitMQProducer.#ctor(Hs.Foundation.RabbitMQ.Common.IRabbitMQClient)">
+            <summary>
+            初始化
+            </summary>
+            <param name="rabbitMQClient"> </param>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Producer.RabbitMQProducer.Publish(Hs.Foundation.RabbitMQ.Message.IMessage,System.String,System.String)">
+            <summary>
+            发送消息
+            </summary>
+            <param name="message">   要发送的消息 </param>
+            <param name="messageId"> 消息标识 </param>
+            <param name="topic">     消息主题 </param>
+            <returns> </returns>
+        </member>
+        <member name="M:Hs.Foundation.RabbitMQ.Producer.RabbitMQProducer.Publish(System.Collections.Generic.IEnumerable{Hs.Foundation.RabbitMQ.Message.PushMessageObject})">
+            <summary>
+            批量发送消息
+            </summary>
+            <param name="messageObject"> </param>
+            <returns> </returns>
+        </member>
+        <member name="T:KingMetal.Domains.Abstractions.Event.EventObject">
+            <summary>
+            事件对象
+            </summary>
+        </member>
+        <member name="P:KingMetal.Domains.Abstractions.Event.EventObject.Event">
+            <summary>
+            事件对象
+            </summary>
+        </member>
+        <member name="P:KingMetal.Domains.Abstractions.Event.EventObject.EventMetadata">
+            <summary>
+            事件元数据
+            </summary>
+        </member>
+        <member name="M:KingMetal.Domains.Abstractions.Event.EventObject.#ctor(Hs.Foundation.RabbitMQ.Event.IEvent,Hs.Foundation.RabbitMQ.Event.EventMetadata)">
+            <summary>
+            初始化
+            </summary>
+            <param name="event">事件对象</param>
+            <param name="eventMetadata">事件元数据</param>
+        </member>
+    </members>
+</doc>

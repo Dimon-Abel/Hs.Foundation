@@ -1,0 +1,778 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hs.Foundation.Utility</name>
+    </assembly>
+    <members>
+        <member name="T:Hs.Foundation.Utility.DateTimeUtc">
+            <summary>
+            自定义时间(UTC)
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.Utility.DateTimeUtc.dateTime">
+            <summary>
+            当前的时间
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.Utility.DateTimeUtc.Now">
+            <summary>
+            当前的时间(UTC时间戳)
+            </summary>
+        </member>
+        <member name="P:Hs.Foundation.Utility.DateTimeUtc.Timestamp">
+            <summary>
+            时间戳(秒)
+            </summary>
+        </member>
+        <member name="M:Hs.Foundation.Utility.DateTimeUtc.#ctor(System.DateTimeOffset)">
+            <summary>
+            初始化
+            </summary>
+            <param name="utcDateTime">UTC时间</param>
+        </member>
+        <member name="M:Hs.Foundation.Utility.DateTimeUtc.#ctor(System.Int64)">
+            <summary>
+            初始化
+            </summary>
+            <param name="timestamp">时间戳</param>
+        </member>
+        <member name="M:Hs.Foundation.Utility.DateTimeUtc.GetDateTime">
+            <summary>
+            获取时间
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.DateTimeUtc.ToDateTimeOffset">
+            <summary>
+            转换为DateTimeOffset
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.DateTimeUtc.ToUnixTimeMilliseconds">
+            <summary>
+            获取时间戳(毫秒)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.DateTimeUtc.ToCurrentDayUnixTimeMilliseconds">
+            <summary>
+            获取当前时间的日期部分的时间戳(毫秒)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.DateTimeUtc.ToCurrentDayUnixTimeMilliseconds(System.TimeSpan)">
+            <summary>
+            获取当前时间的日期部分的时间戳(毫秒)
+            </summary>
+            <param name="offset">与UTC时间的差</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.DateTimeUtc.ToCurrentMonthUnixTimeMilliseconds">
+            <summary>
+            获取当前时间的日期部分的的月的时间戳(毫秒)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.DateTimeUtc.ToCurrentMonthUnixTimeMilliseconds(System.TimeSpan)">
+            <summary>
+            获取当前时间的日期部分的的月的时间戳(毫秒)
+            </summary>
+            <param name="offset">与UTC时间的差</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.DateTimeUtc.CompareTo(Hs.Foundation.Utility.DateTimeUtc)">
+            <summary>
+            比较当前对象和参数对象的大小
+            </summary>
+            <param name="other">要比较的对象</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.DateTimeUtc.Equals(Hs.Foundation.Utility.DateTimeUtc)">
+            <summary>
+            比较连个对象是否相等
+            </summary>
+            <param name="other">要比较的对象</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.DateTimeUtc.Equals(System.Object)">
+            <summary>
+            比较两个UtcDate是否相等
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.DateTimeUtc.GetHashCode">
+            <summary>
+            获取对象的HashCode
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.DateTimeUtc.ToString">
+            <summary>
+            转换为string
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.DateTimeUtc.op_Equality(Hs.Foundation.Utility.DateTimeUtc,Hs.Foundation.Utility.DateTimeUtc)">
+            <summary>
+            重载==运算符
+            </summary>
+            <param name="left">运算符左边对象</param>
+            <param name="right">运算符右边对象</param>
+            <returns>运算结果</returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.DateTimeUtc.op_Inequality(Hs.Foundation.Utility.DateTimeUtc,Hs.Foundation.Utility.DateTimeUtc)">
+            <summary>
+            重载!=运算符
+            </summary>
+            <param name="left">运算符左边对象</param>
+            <param name="right">运算符右边对象</param>
+            <returns>运算结果</returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.DateTimeUtc.op_GreaterThan(Hs.Foundation.Utility.DateTimeUtc,Hs.Foundation.Utility.DateTimeUtc)">
+            <summary>
+            重载>运算符
+            </summary>
+            <param name="left">运算符左边对象</param>
+            <param name="right">运算符右边对象</param>
+            <returns>运算结果</returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.DateTimeUtc.op_LessThan(Hs.Foundation.Utility.DateTimeUtc,Hs.Foundation.Utility.DateTimeUtc)">
+            <summary>
+            重载运算符
+            </summary>
+            <param name="left">运算符左边对象</param>
+            <param name="right">运算符右边对象</param>
+            <returns>运算结果</returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.DateTimeUtc.op_GreaterThanOrEqual(Hs.Foundation.Utility.DateTimeUtc,Hs.Foundation.Utility.DateTimeUtc)">
+            <summary>
+            重载>=运算符
+            </summary>
+            <param name="left">运算符左边对象</param>
+            <param name="right">运算符右边对象</param>
+            <returns>运算结果</returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.DateTimeUtc.op_LessThanOrEqual(Hs.Foundation.Utility.DateTimeUtc,Hs.Foundation.Utility.DateTimeUtc)">
+            <summary>
+            重载运算符
+            </summary>
+            <param name="left">运算符左边对象</param>
+            <param name="right">运算符右边对象</param>
+            <returns>运算结果</returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.DateTimeUtc.op_Implicit(System.Int64)~Hs.Foundation.Utility.DateTimeUtc">
+            <summary>
+            long整形隐式转换UtcDateTime
+            </summary>
+            <param name="timeStamp">时间戳(秒)</param>
+        </member>
+        <member name="M:Hs.Foundation.Utility.DateTimeUtc.op_Implicit(System.DateTimeOffset)~Hs.Foundation.Utility.DateTimeUtc">
+            <summary>
+            DateTimeOffset隐式转换UtcDateTime
+            </summary>
+            <param name="dateTime"></param>
+        </member>
+        <member name="M:Hs.Foundation.Utility.DateTimeUtc.op_Implicit(Hs.Foundation.Utility.DateTimeUtc)~System.Int64">
+            <summary>
+            UtcDateTime对象隐式转换为long
+            </summary>
+            <param name="utcDate"></param>
+        </member>
+        <member name="M:Hs.Foundation.Utility.DateTimeUtc.op_Explicit(Hs.Foundation.Utility.DateTimeUtc)~System.DateTimeOffset">
+            <summary>
+            UtcDateTime对象显式转换为DateTimeOffset
+            </summary>
+            <param name="utcDate"></param>
+        </member>
+        <member name="T:Hs.Foundation.Utility.AssemblyHelper">
+            <summary>
+            程序集相关助手类
+            </summary>
+        </member>
+        <member name="M:Hs.Foundation.Utility.AssemblyHelper.GetAssemblies">
+            <summary>
+            获取全部程序集
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Hs.Foundation.Utility.AttributeHelper">
+            <summary>
+            Attribute相关的助手类
+            </summary>
+        </member>
+        <member name="M:Hs.Foundation.Utility.AttributeHelper.GetCustomAttributeByField``2(``1,System.String,System.Boolean)">
+            <summary>
+            获取对象字段上的特性
+            </summary>
+            <typeparam name="TReturn">特性类型</typeparam>
+            <typeparam name="TInput">对象类型</typeparam>
+            <param name="object">要操作的对象</param>
+            <param name="fieldName">字段名称</param>
+            <param name="inherit">是否同时查找从父类继承的特性</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.AttributeHelper.GetCustomAttributesByField``2(``1,System.String,System.Boolean)">
+            <summary>
+            获取对象字段上的特性集合
+            </summary>
+            <typeparam name="TReturn">特性类型</typeparam>
+            <typeparam name="TInput">对象类型</typeparam>
+            <param name="object">要操作的对象</param>
+            <param name="fieldName">字段名称</param>
+            <param name="inherit">是否同时查找从父类继承的特性</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.AttributeHelper.GetCustomAttributeByField``1(System.Object,System.String,System.Boolean)">
+            <summary>
+            获取对象字段上的特性
+            </summary>
+            <typeparam name="T">特性类型</typeparam>
+            <param name="object">要操作的对象</param>
+            <param name="fieldName">字段名称</param>
+            <param name="inherit">是否同时查找从父类继承的特性</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.AttributeHelper.GetCustomAttributesByField``1(System.Object,System.String,System.Boolean)">
+            <summary>
+            获取对象字段上的特性集合
+            </summary>
+            <typeparam name="T">特性类型</typeparam>
+            <param name="object">要操作的对象</param>
+            <param name="fieldName">字段名称</param>
+            <param name="inherit">是否同时查找从父类继承的特性</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.AttributeHelper.GetCustomAttributesByField(System.Object,System.String,System.Boolean)">
+            <summary>
+            获取对象字段上的特性集合
+            </summary>
+            <param name="object">要操作的对象</param>
+            <param name="fieldName">字段名称</param>
+            <param name="inherit">是否同时查找从父类继承的特性</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.AttributeHelper.GetCustomAttributeByProperty``2(``1,System.String,System.Boolean)">
+            <summary>
+            获取对象属性上的特性
+            </summary>
+            <typeparam name="TReturn">特性类型</typeparam>
+            <typeparam name="TInput">对象类型</typeparam>
+            <param name="object">要操作的对象</param>
+            <param name="propertyName">属性名称</param>
+            <param name="inherit">是否同时查找从父类继承的特性</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.AttributeHelper.GetCustomAttributesByProperty``2(``1,System.String,System.Boolean)">
+            <summary>
+            获取对象属性上的特性
+            </summary>
+            <typeparam name="TReturn">特性类型</typeparam>
+            <typeparam name="TInput">对象类型</typeparam>
+            <param name="object">要操作的对象</param>
+            <param name="propertyName">属性名称</param>
+            <param name="inherit">是否同时查找从父类继承的特性</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.AttributeHelper.GetCustomAttributeByProperty``1(System.Object,System.String,System.Boolean)">
+            <summary>
+            获取对象属性上的特性
+            </summary>
+            <typeparam name="T">特性类型</typeparam>
+            <param name="object">对象类型</param>
+            <param name="propertyName">属性名称</param>
+            <param name="inherit">是否同时查找从父类继承的特性</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.AttributeHelper.GetCustomAttributesByProperty``1(System.Object,System.String,System.Boolean)">
+            <summary>
+            获取对象属性上的特性
+            </summary>
+            <typeparam name="T">特性类型</typeparam>
+            <param name="object">对象类型</param>
+            <param name="propertyName">属性名称</param>
+            <param name="inherit">是否同时查找从父类继承的特性</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.AttributeHelper.GetCustomAttributesByProperty(System.Object,System.String,System.Boolean)">
+            <summary>
+            获取对象属性上的特性
+            </summary>
+            <param name="object">对象类型</param>
+            <param name="propertyName">属性名称</param>
+            <param name="inherit">是否同时查找从父类继承的特性</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.AttributeHelper.GetDisplayNameWithField``1(``0,System.String,System.Boolean)">
+            <summary>
+            获取字段上的DisplayAttribute特性的Name值
+            </summary>
+            <typeparam name="T">对象类型</typeparam>
+            <param name="object">要操作的对象</param>
+            <param name="fieldName">字段名称</param>
+            <param name="inherit">是否同时查找从父类继承的特性</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.AttributeHelper.GetDisplayNameWithField(System.Object,System.String,System.Boolean)">
+            <summary>
+            获取字段上的DisplayAttribute特性的Name值
+            </summary>
+            <param name="object">要操作的对象</param>
+            <param name="fieldName">字段名称</param>
+            <param name="inherit">是否同时查找从父类继承的特性</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.AttributeHelper.GetDisplayNameWithProperty``1(``0,System.String,System.Boolean)">
+            <summary>
+            获取属性上的DisplayAttribute特性的Name值
+            </summary>
+            <typeparam name="T">要操作的对象类型</typeparam>
+            <param name="object">要操作的对象</param>
+            <param name="propertyName">属性名称</param>
+            <param name="inherit">是否同时查找从父类继承的特性</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.AttributeHelper.GetDisplayNameWithProperty(System.Object,System.String,System.Boolean)">
+            <summary>
+            获取属性上的DisplayAttribute特性的Name值
+            </summary>
+            <param name="object">要操作的对象</param>
+            <param name="propertyName">属性名称</param>
+            <param name="inherit">是否同时查找从父类继承的特性</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.AttributeHelper.GetDisplayName(System.Enum,System.Boolean)">
+            <summary>
+            获取枚举的DisplayAttribute的Name
+            </summary>
+            <param name="enum"></param>
+            <param name="inherit">是否同时查找从父类继承的特性</param>
+            <returns></returns>
+        </member>
+        <member name="T:Hs.Foundation.Utility.AutoMapperHelper">
+            <summary>
+            AutoMapper助手类
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.Utility.AutoMapperHelper.mapperCache">
+            <summary>
+            AutoMapper缓存
+            </summary>
+        </member>
+        <member name="M:Hs.Foundation.Utility.AutoMapperHelper.GetMapper``2(System.Action{AutoMapper.IMapperConfigurationExpression},System.Func{System.Type,System.Object},System.Boolean)">
+            <summary>
+            获取Mapper对象
+            </summary>
+            <typeparam name="TSource">映射源类型</typeparam>
+            <typeparam name="TDestination">映射的目标类型</typeparam>
+            <param name="configure">配置委托</param>
+            <param name="serviceCtor">转换委托</param>
+            <param name="refreshCache">是否刷新缓存</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.AutoMapperHelper.GetMapper``2(System.Action{AutoMapper.IMapperConfigurationExpression,AutoMapper.IMappingExpression{``0,``1}},System.Func{System.Type,System.Object},System.Boolean)">
+            <summary>
+            获取Mapper对象
+            </summary>
+            <typeparam name="TSource">映射源类型</typeparam>
+            <typeparam name="TDestination">映射的目标类型</typeparam>
+            <param name="configure">配置委托</param>
+            <param name="serviceCtor">转换委托</param>
+            <param name="refreshCache"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.AutoMapperHelper.GetMapper``2(System.Func{System.Type,System.Object},System.Boolean)">
+            <summary>
+            获取Mapper对象
+            </summary>
+            <typeparam name="TSource">映射源类型</typeparam>
+            <typeparam name="TDestination">映射的目标类型</typeparam>
+            <param name="serviceCtor">转换委托</param>
+            <param name="refreshCache">是否刷新缓存</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.AutoMapperHelper.GetMapper``2(System.Action{AutoMapper.IMapperConfigurationExpression},System.Boolean)">
+            <summary>
+            获取Mapper对象
+            </summary>
+            <typeparam name="TSource">映射源类型</typeparam>
+            <typeparam name="TDestination">映射的目标类型</typeparam>
+            <param name="configure">配置委托</param>
+            <param name="refreshCache">是否刷新缓存</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.AutoMapperHelper.GetMapper``2(System.Action{AutoMapper.IMapperConfigurationExpression,AutoMapper.IMappingExpression{``0,``1}},System.Boolean)">
+            <summary>
+            获取Mapper对象
+            </summary>
+            <typeparam name="TSource">映射源类型</typeparam>
+            <typeparam name="TDestination">映射的目标类型</typeparam>
+            <param name="configure">配置委托</param>
+            <param name="refreshCache">是否刷新缓存</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.AutoMapperHelper.GetMapper``2(System.Boolean)">
+            <summary>
+            获取Mapper对象
+            </summary>
+            <typeparam name="TSource">源类型</typeparam>
+            <typeparam name="TDestination">目标类型</typeparam>
+            <param name="refreshCache">是否刷新缓存</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.AutoMapperHelper.Mapper``2(``0,System.Boolean)">
+            <summary>
+            映射对象
+            </summary>
+            <typeparam name="TSource">映射源类型</typeparam>
+            <typeparam name="TDestination">映射的目标类型</typeparam>
+            <param name="source">源类型对象</param>
+            <param name="refreshCache">是否刷新缓存</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.AutoMapperHelper.Mapper``2(System.Object,System.Action{AutoMapper.IMappingOperationOptions{System.Object,``1}},System.Boolean)">
+            <summary>
+            映射对象
+            </summary>
+            <typeparam name="TSource">映射源类型</typeparam>
+            <typeparam name="TDestination">映射的目标类型</typeparam>
+            <param name="source">源类型对象</param>
+            <param name="opts">自定义映射配置</param>
+            <param name="refreshCache">是否刷新缓存</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.AutoMapperHelper.Mapper``2(``0,System.Action{AutoMapper.IMappingOperationOptions{``0,``1}},System.Boolean)">
+            <summary>
+            映射对象
+            </summary>
+            <typeparam name="TSource">映射源类型</typeparam>
+            <typeparam name="TDestination">映射的目标类型</typeparam>
+            <param name="source">源类型对象</param>
+            <param name="opts">自定义映射配置</param>
+            <param name="refreshCache">是否刷新缓存</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.AutoMapperHelper.Mapper``2(``0,``1,System.Action{AutoMapper.IMappingOperationOptions{``0,``1}},System.Boolean)">
+            <summary>
+            映射对象
+            </summary>
+            <typeparam name="TSource">映射源类型</typeparam>
+            <typeparam name="TDestination">映射的目标类型</typeparam>
+            <param name="source">源类型对象</param>
+            <param name="destination">目标对象</param>
+            <param name="opts">自定义映射配置</param>
+            <param name="refreshCache">是否刷新缓存</param>
+            <returns></returns>
+        </member>
+        <member name="T:Hs.Foundation.Utility.CancellationTokenHelper">
+            <summary>
+            CancellationToken助手类
+            </summary>
+        </member>
+        <member name="M:Hs.Foundation.Utility.CancellationTokenHelper.CreateCancellationToken(System.Int32)">
+            <summary>
+            创建CancellationToken
+            </summary>
+            <param name="millisecondsDelay"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Hs.Foundation.Utility.ConfigurationHelper">
+            <summary>
+            配置对象助手类
+            </summary>
+        </member>
+        <member name="M:Hs.Foundation.Utility.ConfigurationHelper.GetConfiguration(Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            获取配置对象
+            </summary>
+            <param name="configuration"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Hs.Foundation.Utility.HashHelper">
+            <summary>
+            Hash相关助手类
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.Utility.HashHelper.m">
+            <summary>
+            固定值
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.Utility.HashHelper.r">
+            <summary>
+            固定值
+            </summary>
+        </member>
+        <member name="T:Hs.Foundation.Utility.HashHelper.ByteToUintObject">
+            <summary>
+            byte转Uint的数据存放对象
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.Utility.HashHelper.ByteToUintObject.Bytes">
+            <summary>
+            字节数组
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.Utility.HashHelper.ByteToUintObject.UInts">
+            <summary>
+            存放整形数组
+            </summary>
+        </member>
+        <member name="M:Hs.Foundation.Utility.HashHelper.Hash(System.String)">
+            <summary>
+            计算Hash值
+            </summary>
+            <param name="data">计算的数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.HashHelper.Hash(System.String,System.UInt32)">
+            <summary>
+            计算Hash值
+            </summary>
+            <param name="data">计算的数据</param>
+            <param name="seed">种子值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.HashHelper.Hash(System.Byte[])">
+            <summary>
+            计算Hash值
+            </summary>
+            <param name="data">计算的数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.HashHelper.Hash(System.Byte[],System.UInt32)">
+            <summary>
+            计算Hash值
+            </summary>
+            <param name="data">计算的数据</param>
+            <param name="seed">种子值</param>
+            <returns></returns>
+        </member>
+        <member name="T:Hs.Foundation.Utility.Helpers.HtmlTools">
+            <summary>
+            html工具类
+            </summary>
+        </member>
+        <member name="M:Hs.Foundation.Utility.Helpers.HtmlTools.HtmlSantinizerStandard(System.String)">
+            <summary>
+            标准的防止html的xss净化器
+            </summary>
+            <param name="html"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.Helpers.HtmlTools.HtmlSantinizerCustom(System.String,System.String[],System.String[],System.String[])">
+            <summary>
+            自定义的防止html的xss净化器
+            </summary>
+            <param name="html">源html</param>
+            <param name="labels">需要移除的标签集合</param>
+            <param name="attributes">需要移除的属性集合</param>
+            <param name="styles">需要移除的样式集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.Helpers.HtmlTools.RemoveHtmlTag(System.String,System.Int32)">
+            <summary>
+            去除html标签后并截取字符串
+            </summary>
+            <param name="html">源html</param>
+            <param name="length">截取长度</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.Helpers.HtmlTools.ClearHtml(System.String)">
+            <summary>
+            清理Word文档转html后的冗余标签属性
+            </summary>
+            <param name="html"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.Helpers.HtmlTools.ReplaceHtmlImgSource(System.String,System.String)">
+            <summary>
+            替换html的img路径为绝对路径
+            </summary>
+            <param name="html"></param>
+            <param name="imgDest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.Helpers.HtmlTools.ConvertImgSrcToRelativePath(System.String)">
+            <summary>
+            将src的绝对路径换成相对路径
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.Helpers.HtmlTools.MatchImgTags(System.String)">
+            <summary>
+            匹配html的所有img标签集合
+            </summary>
+            <param name="html"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.Helpers.HtmlTools.MatchImgSrcs(System.String)">
+            <summary>
+            匹配html的所有img标签的src集合
+            </summary>
+            <param name="html"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.Helpers.HtmlTools.MatchFirstImgSrc(System.String)">
+            <summary>
+            获取html中第一个img标签的src
+            </summary>
+            <param name="html"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.Helpers.HtmlTools.MatchRandomImgSrc(System.String)">
+            <summary>
+            随机获取html代码中的img标签的src属性
+            </summary>
+            <param name="html"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.Helpers.HtmlTools.StrFormat(System.String)">
+            <summary>
+            替换回车换行符为html换行符
+            </summary>
+            <param name="str">html</param>
+        </member>
+        <member name="M:Hs.Foundation.Utility.Helpers.HtmlTools.EncodeHtml(System.String)">
+            <summary>
+            替换html字符
+            </summary>
+            <param name="strHtml">html</param>
+        </member>
+        <member name="T:Hs.Foundation.Utility.UniqueObjectHelper">
+            <summary>
+            生成全局唯一值
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.Utility.UniqueObjectHelper.startValue">
+            <summary>
+            开始的值
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.Utility.UniqueObjectHelper.startDateTimeString">
+            <summary>
+            开始的时间字符串
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.Utility.UniqueObjectHelper.startDateTimeNumber">
+            <summary>
+            开始的时间整形
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.Utility.UniqueObjectHelper.stringLength">
+            <summary>
+            要生成的字符串的总长度
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.Utility.UniqueObjectHelper.maxValue">
+            <summary>
+            累到最大值
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.Utility.UniqueObjectHelper.lockDateObject">
+            <summary>
+            同步对象
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.Utility.UniqueObjectHelper.startTimestamp">
+            <summary>
+            开始时间截(2018-08-08 08:08:08)
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.Utility.UniqueObjectHelper.machineIdBitLength">
+            <summary>
+            机器id所占的位数
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.Utility.UniqueObjectHelper.datacenterIdBitLength">
+            <summary>
+            数据中心id所占的位数
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.Utility.UniqueObjectHelper.sequenceBitLenth">
+            <summary>
+            序列在id中占的位数
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.Utility.UniqueObjectHelper.maxMachineId">
+            <summary>
+            机器ID的最大值
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.Utility.UniqueObjectHelper.maxDatacenterId">
+            <summary>
+            数据中心ID的最大值
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.Utility.UniqueObjectHelper.machineIdLeft">
+            <summary>
+            机器ID向左移12位
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.Utility.UniqueObjectHelper.datacenterIdIdLeft">
+            <summary>
+            数据中心ID左移17
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.Utility.UniqueObjectHelper.timestampLeft">
+            <summary>
+            时间截向左移22位(5+5+12)
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.Utility.UniqueObjectHelper.maxSequence">
+            <summary>
+            一微秒内可以产生计数，如果达到该值则等到下一微妙在进行生成
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.Utility.UniqueObjectHelper.sequence">
+            <summary>
+            毫秒内序列
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.Utility.UniqueObjectHelper.lastTimestamp">
+            <summary>
+            上次生成ID的时间截
+            </summary>
+        </member>
+        <member name="F:Hs.Foundation.Utility.UniqueObjectHelper.lockSnowObject">
+            <summary>
+            同步对象
+            </summary>
+        </member>
+        <member name="M:Hs.Foundation.Utility.UniqueObjectHelper.NextTimeMilliseconds(System.Int64)">
+            <summary>
+            获取下一毫秒时间戳
+            </summary>
+            <param name="lastTimestamp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.UniqueObjectHelper.GetTimestamp">
+            <summary>
+            生成当前时间戳
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.UniqueObjectHelper.NewIdWithDate">
+            <summary>
+            根据时间生成唯一ID,长度固定为20，理论上每秒可以用生成最多999999个随机数(不同机器相同时间可能产生重复,同一台机器保证不重复)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.UniqueObjectHelper.NewIdWithSnowFlake(System.Int64,System.Int64)">
+            <summary>
+            生成分布式唯一ID(雪花算法)
+            </summary>
+            <param name="machineId">机器ID(0~31)</param>
+            <param name="datacenterId">数据中心ID(0~31)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hs.Foundation.Utility.UniqueObjectHelper.NewIdWithGuid">
+            <summary>
+            根据GUID生成唯一ID
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
